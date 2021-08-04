@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-iz=y_0uheq-#c5i%f#(^2h*09+_w(w#(76*a&g=rgja+)uxg75'
+# SECRET_KEY = 'django-insecure-iz=y_0uheq-#c5i%f#(^2h*09+_w(w#(76*a&g=rgja+)uxg75'
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
@@ -164,3 +165,5 @@ AWS_DEFAULT_ACL = None
 AWS_S3_REGION_NAME = 'ap-south-1'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+django_heroku.settings(locals())
