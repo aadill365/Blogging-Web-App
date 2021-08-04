@@ -54,10 +54,6 @@ def profile(request):
 									instance=request.user.profile)
 		if u_form.is_valid() and p_form.is_valid():
 			user = User.objects.get(id=request.user.id)
-			file_path = os.path.join(settings.BASE_DIR,user.profile.image.path)
-			if p_form.cleaned_data.get('image') != user.profile.image:
-				if not user.profile.image == 'default.jpeg':
-					os.remove(file_path)
 			u_form.save()
 			p_form.save()
 			if u_form.cleaned_data.get('is_active') == False:

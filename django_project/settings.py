@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +27,7 @@ SECRET_KEY = 'django-insecure-iz=y_0uheq-#c5i%f#(^2h*09+_w(w#(76*a&g=rgja+)uxg75
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# ['aadill-shaikhh.herokuapp.com']
 
 
 # Application definition
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -120,11 +123,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -144,3 +147,18 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mail2adil365@gmail.com'
 EMAIL_HOST_PASSWORD = 'secwydcbqdyxpinu'
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
+# AWS_ACCESS_KEY_ID = 'AKIAQN6BTUMAZEE7NW46'
+# AWS_SECRET_ACCESS_KEY = "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"
+# AWS_STORAGE_BUCKET_NAME = 'django-files-aadill'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+
+AWS_S3_REGION_NAME = 'ap-south-1'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
